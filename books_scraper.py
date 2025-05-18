@@ -17,7 +17,7 @@ HEADERS = {
     )
 }
 RETRY_COUNT = 3
-RATE_LIMIT_DELAY = (1, 3)  # Random delay between requests in seconds
+RATE_LIMIT_DELAY = (1, 3)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
