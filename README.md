@@ -1,4 +1,4 @@
-# Book-Data-Scraper
+#Goodreads-Scraper
 
 A professional Python-based tool for efficiently scraping and analyzing book data from [Goodreads](https://www.goodreads.com). Designed for researchers, developers, and book enthusiasts who need structured and detailed book metadata in bulk.
 
@@ -103,6 +103,16 @@ python books_scraper.py
   * Rate limiting.
   * Automatic retries (up to 3 times per failed request).
   * Output file options (`books.json`, `books.csv`).
+
+---
+
+## 🔧 Tech Stack
+
+<div align="left">
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) ![Requests](https://img.shields.io/badge/Requests-005571?style=for-the-badge&logo=python&logoColor=white) ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-4B0082?style=for-the-badge&logo=beautifulsoup&logoColor=white) ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white) ![Logging](https://img.shields.io/badge/Logging-333333?style=for-the-badge&logo=python&logoColor=white) ![URLlib](https://img.shields.io/badge/urllib-007396?style=for-the-badge&logo=python&logoColor=white)
+
+</div>
 
 ---
 
