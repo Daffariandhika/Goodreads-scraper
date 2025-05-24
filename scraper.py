@@ -25,7 +25,7 @@ Example Output:
         {
             "title": "Fight Club",
             "authorName": "Chuck Palahniuk",
-            "description": "Chuck Palahniuk showed himself to be his generation...",
+            "description": "Chuck Palahniuk showed himself to be his generation",
             "isbn": "9780393355949",
             "publication": "1996-08-17",
             "pages": 224,
