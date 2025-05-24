@@ -20,7 +20,7 @@ Usage:
     Run from the command line:
         python scraper.py
 
-Example JSON Output:
+Example Output:
     [
         {
             "title": "Fight Club",
