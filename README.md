@@ -1,152 +1,95 @@
-#Goodreads-Scraper
-
-A professional Python-based tool for efficiently scraping and analyzing book data from [Goodreads](https://www.goodreads.com). Designed for researchers, developers, and book enthusiasts who need structured and detailed book metadata in bulk.
-
----
-
-## ✨ Overview
-
-This project includes two main Python scripts that work together to collect and extract book information from Goodreads:
-
-* **`url_scraper.py`** — Gathers book URLs based on a genre or search query.
-* **`books_scraper.py`** — Scrapes detailed book data from the URLs collected.
-
-Output is saved in both **JSON** and **CSV** formats for easy integration and analysis.
-
----
-
-## 🌟 Features
-
-### `url_scraper.py`
-
-* Scrapes book URLs from a specific genre or search results page.
-* Automatically handles pagination.
-* Allows configuration for maximum number of URLs (`max_urls`).
-* Saves extracted URLs into a Python file (`books_url.py`) for use in the next script.
-
-### `books_scraper.py`
-
-* Parses and extracts detailed book data from URLs.
-* Includes retry logic for failed HTTP requests.
-* Automatically rate-limits requests to avoid server blocks.
-* Outputs structured data to `books.json` and `books.csv`.
-
----
-
-## ⚙️ Prerequisites
-
-Ensure you have **Python 3.10+** installed.
-Install required packages:
-
-```bash
-pip install pandas requests beautifulsoup4
-```
-
----
-
-## 📄 Usage Guide
-
-### 1. `url_scraper.py`
-
-Collects Goodreads book URLs based on a search or genre page.
-
-**Setup:**
-
-* Modify the `genre_url` or `search_url` variable inside the script.
-* Set `max_urls` to define how many book links to fetch.
-
-**Run the script:**
-
-```bash
-python url_scraper.py
-```
-
-**Output:**
-
-* Saves URLs to `books_url.py`
-
----
-
-### 2. `books_scraper.py`
-
-Scrapes detailed data from each book URL gathered earlier.
-
-**Ensure:**
-
-* `books_url.py` (output of the first script) is in the same directory.
-
-**Run the script:**
-
-```bash
-python books_scraper.py
-```
-
-**Output:**
-
-* `books.json` — Raw JSON format.
-* `books.csv` — Tabular data for spreadsheets or databases.
-
----
-
-## 🔧 Parameters & Configuration
-
-### `url_scraper.py`
-
-* `genre_url` or `search_url` — Goodreads URL to start scraping.
-* `max_urls` — Maximum number of book URLs to collect.
-* `delay` — Delay (in seconds) between requests.
-
-### `books_scraper.py`
-
-* Includes:
-
-  * Rate limiting.
-  * Automatic retries (up to 3 times per failed request).
-  * Output file options (`books.json`, `books.csv`).
-
----
-
-## 🔧 Tech Stack
-
+# Goodreads Scraper
 <div align="left">
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) ![Requests](https://img.shields.io/badge/Requests-005571?style=for-the-badge&logo=python&logoColor=white) ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-4B0082?style=for-the-badge&logo=beautifulsoup&logoColor=white) ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white) ![Logging](https://img.shields.io/badge/Logging-333333?style=for-the-badge&logo=python&logoColor=white) ![URLlib](https://img.shields.io/badge/urllib-007396?style=for-the-badge&logo=python&logoColor=white)
+![Python version](https://img.shields.io/badge/python-3.8+-blue.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
----
+> This script was created as part of my college project, [ReadUniverse](https://read-universe-react.vercel.app/), where I needed a large volume of book data for development and dummy content.
 
-## ⚡ Troubleshooting
+## Prerequisites
+Before running the scripts, make sure you have Python 3.8+ installed. Then install the required dependencies using:
+```bash
+pip install -r requirements.txt
+```
 
-* **No URLs Found:**
+## Overview
+This project consists of three main Python scripts that work together to collect and extract book data from Goodreads:
 
-  * Double-check the `search_url` or `genre_url` format.
-  * Ensure the page has books listed and hasn’t changed its structure.
+**`url.py`** — Collects book URLs based on a genre, shelf, list, or search query.
 
-* **Script Fails to Scrape Data:**
+**`list.py`** —  Automatically generated after running **`url.py`**, this file stores the collected book URLs by default.
 
-  * Goodreads may be temporarily blocking requests. Try increasing delay.
-  * Make sure `books_url.py` contains valid book URLs.
+**`scraper.py`** — Extracts detailed book information from the URLs stored in the **`list.py`** file.
 
-* **Empty Output Files:**
+## Command-Line Arguments
+### `url.py`
+The following command-line arguments configure the URL collection process:
 
-  * Check that URLs collected are reachable.
-  * Review console output for errors or skipped entries.
+- **`--url`** (string, *required*):  
+  The Goodreads shelf, search, or list page URL from which to start scraping book URLs.
 
----
+- **`--max`** (integer, *optional*):  
+  The maximum number of book URLs to collect.  
+  **Default:** `20`
 
-## 🚀 Future Improvements
+- **`--delay`** (integer, *optional*):  
+  Delay in seconds between consecutive page requests to respect Goodreads' rate limits and avoid overloading their servers.  
+  **Default:** `2`
 
-* Proxy support for large-scale scraping
-* CLI support for dynamic URL input
-* Integration with Goodreads APIs (if public access returns)
+- **`--output`** (string, *optional*):  
+  The filename where the collected URLs will be saved as a Python file containing a list of URLs. 
+  **Default:** `"list.py"`
 
----
+> **Note:** The collected URLs will be saved into the specified output file (default is `list.py`).
 
-## 📚 License
+**Usage example:**
+```bash
+python url.py --url https://www.goodreads.com/shelf/show/fantasy --max 50 --delay 1 --output books.py
+```
 
-This project is released under the MIT License.
+### `scraper.py`
+Currently, `scraper.py` does not accept any command-line arguments. It automatically processes the list of book URLs saved in the output file generated by `url.py` (default: `list.py`).
 
----
+**Usage example:**
+```bash
+python scraper.py
+```
 
-Made with ❤️ for book lovers and data enthusiasts.
+## Workflow
+1. Run `url.py` to collect book URLs and save them to a Python file (e.g., `list.py` or a custom filename).
+2. Run `scraper.py` to scrape detailed book data from the URLs contained in that file.
+3. The scraped data will be exported in JSON and CSV formats for further analysis.
+
+## Scraped Data Output
+The extracted data are saved in `data.json` and `data.csv` below are the JSON example:
+```json
+    {
+        "title": "Fight Club",
+        "authorName": "Chuck Palahniuk",
+        "description": "Chuck Palahniuk showed himself to be his generation",
+        "isbn": "9780393355949",
+        "publication": "1996-08-17",
+        "pages": 224,
+        "category": [
+            "Fiction",
+            "Classics",
+            "Thriller",
+            "Contemporary",
+            "Novels",
+            "Mystery",
+            "Literature"
+        ],
+        "likes": 69,
+        "averageRating": 4.18,
+        "totalRating": 625058,
+        "totalReview": 25009,
+        "price": 57000,
+        "stock": 7,
+        "imageURL": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1558216416i/36236124.jpg"
+    }
+```
+
+## Summary
+This project provides a scalable and modular solution for extracting comprehensive book data from Goodreads. The `url.py` script collects book URLs based on specified criteria (genre, shelf, or search) and saves them in a Python file (default: `list.py`). The `scraper.py` script processes these URLs to scrape detailed book metadata, exporting the results in JSON and CSV formats. This approach enables efficient, large-scale data harvesting suitable for analytics, research, machine learning datasets, or app development.
