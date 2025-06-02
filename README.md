@@ -91,5 +91,7 @@ The extracted data are saved in `data.json` and `data.csv` below are the JSON ex
     }
 ```
 
+> There are `Likes`, `Price` and `Stock` field, those 3 field created only for the dummy data, not from actual goodreads website 
+
 ## Summary
 This project provides a scalable and modular solution for extracting comprehensive book data from Goodreads. The `url.py` script collects book URLs based on specified criteria (genre, shelf, or search) and saves them in a Python file (default: `list.py`). The `scraper.py` script processes these URLs to scrape detailed book metadata, exporting the results in JSON and CSV formats. This approach enables efficient, large-scale data harvesting suitable for analytics, research, machine learning datasets, or app development.
