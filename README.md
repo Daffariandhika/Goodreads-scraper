@@ -6,8 +6,6 @@
 
 </div>
 
-> This script was created as part of my college project, [ReadUniverse](https://read-universe-react.vercel.app/), where I needed a large volume of book data for development and dummy content.
-
 ## Prerequisites
 Before running the scripts, make sure you have Python 3.8+ installed. Then install the required dependencies using:
 ```bash
