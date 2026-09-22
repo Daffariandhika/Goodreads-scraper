@@ -51,7 +51,7 @@ Example Output:
 
 Best Practices:
     - Avoid too aggressive scraping to prevent IP blocking.
-    - Use realistic delays and limit the number of requests per session.
+    - Use realistic delays and limit the number of requests per scraping session.
 
 Author:
     Riandhika (2025)
